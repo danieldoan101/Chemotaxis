@@ -1,18 +1,23 @@
  int lampColor;
- Bacteria bob = new Bacteria();
+ Bacteria [] colony = new Bacteria[10];
  void setup()   
  {   
  	lampColor = color(255);
  	rectMode(CENTER);  
  	size(500, 500); 
+ 	for(int i = 0; i < colony.length;i ++){
+ 		colony[i] = new Bacteria();
+ 	}
  }   
  void draw()   
  {    
- 	background(197);
- 	fill(bob.myColor);
- 	bob.move();
- 	bob.show();
- 	lamp(); 
+ 	background(195);
+ 	for(int i = 0; i < colony.length; i++){
+ 		fill(colony[i].myColor);
+ 		colony[i].move();
+ 		colony[i].show();
+ 	}
+ 	lamp(); 	
  }  
  void mousePressed(){
  	if(lampColor == color(255,0,0)){
@@ -41,9 +46,53 @@
  	}
  	void move(){
  		if(lampColor == color(255)){
- 			myX = myX + (int)(Math.random()*7)-3;
- 			myY = myY + (int)(Math.random()*7)-3;
+ 			myX = myX + (int)(Math.random()*5)-2;
+ 			myY = myY + (int)(Math.random()*5)-2;
+ 		}else if (lampColor == color(0,255,0)) {
+ 			if(myX < mouseX){
+ 				if(myY < mouseY+40){
+ 					myX = myX + (int)(Math.random()*5)-3;
+ 					myY = myY + (int)(Math.random()*5)-3;
+ 				}else if(myY > mouseY+40){
+ 					myX = myX + (int)(Math.random()*5)-3;
+ 					myY = myY + (int)(Math.random()*5)-1;
+ 				}
+ 			}else if(myX > mouseX){
+ 				if(myY < mouseY+40){
+ 					myX = myX + (int)(Math.random()*5)-1;
+ 					myY = myY + (int)(Math.random()*5)-3;
+ 				}else if(myY > mouseY){
+ 					myX = myX + (int)(Math.random()*5)-1;
+ 					myY = myY + (int)(Math.random()*5)-1;
+ 				}
+ 			}else if(myX == mouseX){
+ 				myX = myX + (int)(Math.random()*5)-2;
+ 				myY = myY + (int)(Math.random()*5)-2;
+ 			}
+ 		}else{
+ 			if(myX < mouseX){
+ 				if(myY < mouseY+40){
+ 					myX = myX + (int)(Math.random()*5)-1;
+ 					myY = myY + (int)(Math.random()*5)-1;
+ 				}else if(myY > mouseY+40){
+ 					myX = myX + (int)(Math.random()*5)-1;
+ 					myY = myY + (int)(Math.random()*5)-3;
+ 				}
+ 			}else if(myX > mouseX){
+ 				if(myY < mouseY+40){
+ 					myX = myX + (int)(Math.random()*5)-3;
+ 					myY = myY + (int)(Math.random()*5)-1;
+ 				}else if(myY > mouseY+40){
+ 					myX = myX + (int)(Math.random()*5)-3;
+ 					myY = myY + (int)(Math.random()*5)-3;
+ 				}
+ 			}else if(myX == mouseX){
+ 				myX = myX + (int)(Math.random()*5)-2;
+ 				myY = myY + (int)(Math.random()*5)-2;
+ 			}
  		}
+		myX = myX + (int)(Math.random()*5)-2;
+		myY = myY + (int)(Math.random()*5)-2;
  	}   
  	void show(){
  		ellipse(myX,myY,30,30);
